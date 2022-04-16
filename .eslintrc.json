@@ -45,6 +45,12 @@
               "allowArrayStart": true,
               "allowArrayEnd": true
             }
+          ],
+          "no-restricted-imports": [
+            "error",
+            {
+              "patterns": ["@/app/*/*"]
+            }
           ]
       }
 }

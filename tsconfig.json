@@ -20,8 +20,12 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"],
+  "baseUrl" : "src",
+  "paths" : {
+    "-/*":["*"],
+  },
+  "include": ["src", "public/layouts"],
   "exclude": ["node_modules"],
-  "extends": "./tsconfig.paths.json"
+  "extends": "./tsconfig.paths.json",
 
 }

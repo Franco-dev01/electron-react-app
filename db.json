@@ -1,0 +1,42 @@
+{
+  "user": [
+    {
+      "id": "24ewrgsfssreur324e",
+      "name": "Kouakou francis",
+      "password": "324rf",
+      "role": "admin",
+      "email": "kouakoufrancis809@gmail.com",
+      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6ImtvdWFrb3Uga291YWtvdSBmcmFuY2lzIiwiZW1haWwiOiJrb3Vha291ZnJhbmNpczgwOUBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE1MTYyMzkwMjJ9.lWNiWVr5S83Uvja07Z9VRnl7zMLgz9Y7USCR_SJ8ze0"
+    },
+    {
+      "email": "shreyu@coderthemes.com",
+      "password": "test",
+      "id": "UzOoZXB"
+    },
+    {
+      "email": "shreyu@coderthemes.com",
+      "password": "test",
+      "id": "vx_dcmg"
+    },
+    {
+      "email": "kouakoufrancis809@gmail.com",
+      "password": "456",
+      "id": "hTYGAzr"
+    },
+    {
+      "email": "waety@gmail.com",
+      "password": "azerty",
+      "id": "5rtjZEg"
+    },
+    {
+      "email": "shreyu@coderthemes.com",
+      "password": "test",
+      "id": "TlHCdrR"
+    },
+    {
+      "email": "shreyu@coderthemes.com",
+      "password": "test",
+      "id": "Ed9wkNg"
+    }
+  ]
+}

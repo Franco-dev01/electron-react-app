@@ -6,37 +6,74 @@
     "@craco/craco": "^6.4.3",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@hookform/resolvers": "^2.8.8",
+    "@iconify/react": "^3.2.1",
+    "@mui/icons-material": "^5.6.1",
     "@mui/material": "^5.6.1",
+    "@mui/x-data-grid": "^5.11.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
     "@testing-library/user-event": "^13.5.0",
+    "@types/cross-storage": "^0.8.30",
     "@types/jest": "^27.4.1",
     "@types/node": "^16.11.27",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "axios": "^0.25.0",
+    "cross-storage": "^1.0.0",
     "electron-is-dev": "^2.0.0",
+    "json-server": "^0.17.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
+    "react-error-boundary": "^3.1.4",
+    "react-hook-form": "^7.31.1",
+    "react-hot-toast": "^2.2.0",
+    "react-query": "^3.34.19",
+    "react-query-auth": "^1.1.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.1",
+    "react-toastify": "^8.2.0",
+    "react-topbar-progress-indicator": "^4.1.1",
+    "recharts": "^2.1.9",
     "sass": "^1.49.4",
+    "storybook": "^6.5.3",
     "typescript": "^4.6.3",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject",
+    "electron-dev": "concurrently \"BROWSER=none yarn start\" \"wait-on http://localhost:3000 && electron .\"",
+    "check-types": "tsc --project tsconfig.json --pretty --noEmit",
+    "lint-staged": "lint-staged",
+    "check-format": "npm run prettier -- --list-different",
+    "validate-and-build": "npm-run-all --parallel check-types check-format lint build",
+    "validate": "npm-run-all --parallel check-types && lint-staged",
+    "lint": "eslint --fix --ext .js,.ts,.tsx ./src --ignore-path .gitignore",
+    "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\"",
+    "format": "npm run prettier -- --write",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -52,7 +89,17 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.4",
+    "@storybook/addon-actions": "^6.5.3",
+    "@storybook/addon-essentials": "^6.5.3",
+    "@storybook/addon-interactions": "^6.5.3",
+    "@storybook/addon-links": "^6.5.3",
+    "@storybook/builder-webpack5": "^6.5.3",
+    "@storybook/manager-webpack5": "^6.5.3",
+    "@storybook/node-logger": "^6.5.3",
+    "@storybook/preset-create-react-app": "^4.1.0",
+    "@storybook/react": "^6.5.3",
+    "@storybook/testing-library": "^0.0.11",
+    "babel-plugin-named-exports-order": "^0.0.2",
     "concurrently": "^7.1.0",
     "cross-env": "^7.0.3",
     "electron": "^18.0.4",
@@ -60,10 +107,14 @@
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "postcss": "^8.4.12",
+    "msw": "^0.39.2",
     "prettier": "2.6.2",
-    "tailwindcss": "^3.0.24",
-    "wait-on": "^6.0.1"
+    "prop-types": "^15.8.1",
+    "wait-on": "^6.0.1",
+    "webpack": "^5.72.1"
   },
-  "main": "public/electron.js"
+  "main": "./public/electron.js",
+  "msw": {
+    "workerDirectory": "public"
+  }
 }

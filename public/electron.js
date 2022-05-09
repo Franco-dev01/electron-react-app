@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -19,6 +20,7 @@ function createWindow() {
 app.on("ready", createWindow);
 
 app.on("window-all-closed", () => {
+  // eslint-disable-next-line no-undef
   if (process.platform !== "darwin") {
     app.quit();
   }

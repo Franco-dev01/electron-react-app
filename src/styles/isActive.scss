@@ -1,0 +1,15 @@
+.active {
+    color: #11A1F2 !important;
+   
+    .active ::before {
+        height: 100px;
+        border: solid;
+        color: red;
+    }
+}
+
+.inactive {
+    color: #fff;
+    background-color: inherit !important;
+    width: 100%;
+}

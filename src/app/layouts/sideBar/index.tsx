@@ -4,16 +4,14 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Icon } from "@iconify/react";
-import { Box, Collapse, Tooltip } from "@mui/material";
+import { Box, Collapse, CssBaseline, Tooltip, Typography } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { MENU_LISTE } from "../../constants/menuListe";
 import { NavLink } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
 import { Drawer, DrawerHeader, IconStyle } from "./indexStyle";
+import IconApp from "../../assets/images/img002.png";
 
 export function SideBar(props: any) {
-  const theme = useTheme();
   const { open, handleDrawerClose } = props;
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const handleOpenCollapse = (): void => setCollapseOpen(!collapseOpen);
@@ -21,14 +19,15 @@ export function SideBar(props: any) {
   return (
     <Drawer variant="permanent" open={open}>
       <Box sx={{ backgroundColor: "#032756", flexGrow: 1 }}>
-        <DrawerHeader>
+        <DrawerHeader sx={{ backgroundColor: "#fff", flexGrow: 1, }}>
           <IconButton onClick={handleDrawerClose} sx={{ color: "#fff" }}>
-            {theme.direction === "rtl" ? null : (
-              <Icon icon="clarity:expand-card-line" color="white" rotate={3} hFlip={true} />
-            )}
+            <img src={IconApp} alt="logo" style={{border: 10}} title="Logo" height={50} width={80}/>
           </IconButton>
+            <Typography sx={{flexGrow:1, fontSize: 16, fontWeight:" bold"}} component="span" color="primary">Cross App</Typography>
         </DrawerHeader>
         <Divider color="#fff" style={{ marginTop: 8 }} />
+        <CssBaseline />
+
 
         {MENU_LISTE &&
           MENU_LISTE.map((menu: any, index: any) => (
@@ -57,7 +56,7 @@ export function SideBar(props: any) {
                   </Box>
                   <Collapse in={collapseOpen} timeout="auto" unmountOnExit>
                     <List>
-                      {menu?.children.map((child: any, idx: any) => (
+                      {menu?.children?.map((child: any, idx: any) => (
                         <NavLink
                           className={({ isActive }) => (isActive ? "active" : "inactive")}
                           to={child?.path}

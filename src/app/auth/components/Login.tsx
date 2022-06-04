@@ -37,7 +37,7 @@ export default function Login() {
 
   const onSubmit = async (values: any) => {
     try {
-      login(values);
+      await login(values);
       navigate("/app/dashboard");
     } catch (error) {
       console.error("error", error);
@@ -56,7 +56,7 @@ export default function Login() {
           Sign in{" "}
         </Typography>
         <Typography fontSize={15} color="gray">
-          Log in to your account to continue{" "}
+          Login to your account to continue{" "}
         </Typography>
         <Stack
           display="flex"

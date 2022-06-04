@@ -1,11 +1,10 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
-import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
@@ -14,10 +13,11 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Avatar, InputAdornment, Stack, TextField, Typography } from "@mui/material";
+import { Avatar, Stack, Typography } from "@mui/material";
 
-import { ProfileIcon, FlagIcon, SettingIcon, AlertIcon } from "../../components/icons/index";
-import { Search } from "@mui/icons-material";
+import { FlagIcon, SettingIcon, AlertIcon } from "../../components/icons/index";
+import { storage } from "../../../app/utils";
+import { Lock, NotificationAddRounded, Person } from "@mui/icons-material";
 
 const drawerWidth = 240;
 
@@ -73,6 +73,13 @@ export default function Header(props: any) {
 
   const menuId = "primary-search-account-menu";
 
+  const clearLocalStorage = () => {
+    storage.clearToken();
+    storage.clearUser();
+    if (!storage.getToken() && !storage.getUser()) {
+      return (window.location.href = "auth/login");
+    }
+  };
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
@@ -86,13 +93,52 @@ export default function Header(props: any) {
         vertical: "top",
         horizontal: "right"
       }}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1
+          },
+          "&:before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0
+          }
+        }
+      }}
       open={isMenuOpen}
       onClose={handleMenuClose}>
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Messages</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Help</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Lock screen</MenuItem>
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <IconButton>
+          <Person />
+        </IconButton>
+        Profile
+      </MenuItem>
+      <MenuItem onClick={handleMenuClose}>
+        <IconButton>
+          <NotificationAddRounded />
+        </IconButton>
+        Messages
+      </MenuItem>
+      <MenuItem onClick={() => clearLocalStorage()}>
+        <IconButton>
+          <Lock />
+        </IconButton>
+        Logout
+      </MenuItem>
     </Menu>
   );
 
@@ -111,10 +157,40 @@ export default function Header(props: any) {
         vertical: "top",
         horizontal: "right"
       }}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1
+          },
+          "&:before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0
+          }
+        }
+      }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
       <MenuItem>
-        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+        <IconButton
+          sx={{ width: 100, height: 100 }}
+          size="large"
+          aria-label="show 4 new mails"
+          color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
@@ -122,7 +198,11 @@ export default function Header(props: any) {
         <p>Messages</p>
       </MenuItem>
       <MenuItem>
-        <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+        <IconButton
+          sx={{ width: 100, height: 100 }}
+          size="large"
+          aria-label="show 17 new notifications"
+          color="inherit">
           <Badge badgeContent={17} color="error">
             <NotificationsIcon />
           </Badge>
@@ -143,8 +223,10 @@ export default function Header(props: any) {
     </Menu>
   );
 
+  const user = JSON.parse(storage?.getUser());
+
   return (
-    <>
+    <React.Fragment>
       <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
@@ -154,50 +236,53 @@ export default function Header(props: any) {
             edge="start"
             sx={{
               marginRight: 5,
-              ...(open && { display: "none", color:"#032756" })
+              ...(open && { display: "none", color: "#032756" })
             }}
             size="large">
             <MenuIcon />
           </IconButton>
 
-            {/* <TextField placeholder="Search..." size="small" type="text" 
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <Search />
-                </InputAdornment>
-              ),
-            }}
-            sx={{color:"#f3f3f9"}}/> */}
-            
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <IconButton>
+          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", justifyContent: "center",}}>
+            <IconButton sx={{width: 50, height: 50}}>
               <Avatar alt="Remy Sharp" src={SettingIcon} sx={{ width: 24, height: 24 }} />
             </IconButton>
-            <IconButton size="small" aria-label="flags" color="inherit">
+            <IconButton sx={{width: 50, height: 50}} size="small" aria-label="flags" color="inherit">
               <Avatar alt="Flag" src={FlagIcon} sx={{ width: 24, height: 24 }} />
             </IconButton>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+            <IconButton  sx={{width: 50, height: 50}} size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <Avatar src={AlertIcon} sx={{ width: 24, height: 24 }} />
               </Badge>
             </IconButton>
-            <Stack   onClick={handleProfileMenuOpen} flexGrow={1} sx={{display:"flex", flexDirection:"row", padding:1, background:"#F3F3F9", cursor:"pointer"}}>
-            <IconButton
-              size="medium"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              color="inherit">
-              <Avatar alt="Remy Sharp" src={ProfileIcon} />
-            </IconButton>
-            <Box sx={{marginLeft: 2}}>
-            <Typography color="black" fontSize={16} fontWeight="bold">Kouakou</Typography>
-            <Typography color="gray" fontSize={10}>Kouakou Francis</Typography>
-            </Box>
-
+            <Stack
+              onClick={handleProfileMenuOpen}
+              flexGrow={1}
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                padding: 1,
+                background: "#F3F3F9",
+                cursor: "pointer",
+              }}>
+              <IconButton
+                size="medium"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                color="inherit"
+                >
+                <Avatar alt={user.firstName} />
+              </IconButton>
+              <Box sx={{ marginLeft: 2 }}>
+                <Typography color="black" fontSize={16} fontWeight="bold">
+                  {user?.firstName}
+                </Typography>
+                <Typography color="gray" fontSize={10}>
+                  {user?.lastName}
+                </Typography>
+              </Box>
             </Stack>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
@@ -215,6 +300,6 @@ export default function Header(props: any) {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
-    </>
+    </React.Fragment>
   );
 }

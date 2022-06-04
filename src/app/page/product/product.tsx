@@ -30,7 +30,7 @@ export default function Product() {
             }}/>
         </Grid>
         <Grid item xs={6} md={2} textAlign="end">
-            <Button startIcon={<Add/>} color="primary" variant="contained" sx={{color:"#fff"}} onClick={handleOpen}>Add product</Button>
+            <Button startIcon={<Add/>} color="primary" variant="contained" sx={{color:"#fff"}} onClick={handleOpen}>Nouveau produit</Button>
         </Grid>
         <Grid item xs={12} md={12}>
         <ProductTable/>

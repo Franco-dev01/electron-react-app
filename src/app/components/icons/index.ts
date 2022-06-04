@@ -12,7 +12,9 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import LockIcon from "@mui/icons-material/Lock";
 import PersonIcon from "@mui/icons-material/Person";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
-
+import SellIcon from "@mui/icons-material/Sell";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LanguageIcon from "@mui/icons-material/Language";
 export {
   ProfileIcon,
   FlagIcon,
@@ -26,5 +28,8 @@ export {
   CalendarMonthIcon,
   LockIcon,
   LoyaltyIcon,
-  PersonIcon
+  PersonIcon,
+  SellIcon,
+  SettingsIcon,
+  LanguageIcon,
 };

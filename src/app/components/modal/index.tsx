@@ -11,27 +11,27 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  minWidth: 300,
-  minHeight:350,
+  minWidth: 200,
+  minHeight: 250,
   bgcolor: "background.paper",
-  border: "2px solid #fff",
+  border: "1px solid #fff",
   boxShadow: 24,
-  borderRadius: 2,
-  display:"flex",
+  borderRadius: 1,
+  display: "flex",
+  flexDirection:"column",
   justifyContent: "center",
   alignItems: "center",
-  p: 4,
+  p: 2
 };
 
-export type PropsType= {
-    open: boolean,
-    handleClose: () =>{},
-    children: React.ReactNode
-}
+export type PropsType = {
+  open: boolean;
+  handleClose: () => {};
+  children: React.ReactNode;
+};
 
- const ModalContent: React.FC<PropsType> = (props) => {
-
-  const {open, handleClose, children } = props;
+const ModalContent: React.FC<PropsType> = (props) => {
+  const { open, handleClose, children } = props;
 
   return (
     <div>
@@ -43,18 +43,18 @@ export type PropsType= {
         closeAfterTransition
         BackdropComponent={Backdrop}
         BackdropProps={{
-          timeout: 500,
-        }}
-      >
+          timeout: 800
+        }}>
         <Fade in={open}>
-          <Box sx={style}>
-              <Stack>{ children }</Stack>
-          </Box>
+            <Box sx={style}>
+              <Stack>
+                {children}
+              </Stack>
+            </Box>
         </Fade>
       </Modal>
     </div>
   );
-}
+};
 
-
-export default  ModalContent;
+export default ModalContent;

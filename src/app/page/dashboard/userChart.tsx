@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { PieChart, Pie, Sector, Cell, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 const data = [
   { name: "Group A", value: 400 },

@@ -1,9 +1,16 @@
 .active {
-    color: #11A1F2 !important;
+    color: #fff !important;
 }
 
 .inactive {
-    color: #fff;
+    color: #fff !important;
     background-color: inherit !important;
     width: 100%;
+}
+.side-menu{
+    background-color: #fff !important;
+}
+.side-nav-link-ref{
+    color: #fff !important;
+
 }

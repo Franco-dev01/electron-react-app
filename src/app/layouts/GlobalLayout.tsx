@@ -2,7 +2,7 @@ import React from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 
 import Header from "./header";
-import { SideBar } from "./sideBar";
+import { SideBar } from "./sideBar/Menu";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material/styles";
 import { Outlet } from "react-router-dom";
@@ -19,30 +19,18 @@ export type GlobalDashboadProps = {
   children: React.ReactChild;
 };
 const GlobalLayout: React.FC<GlobalDashboadProps> = () => {
-  const [open, setOpen] = React.useState(true);
+  const [openDrawer, setOpenDrawer] = React.useState<boolean>(true);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  const handleDrawer = () => {
+    setOpenDrawer(!openDrawer);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   return (
-    <Box sx={{ display: "flex", backgroundColor: "#F3F7F9", width:"100%" }}>
+    <Box sx={{ display: "flex", backgroundColor: "#F3F7F9", width: "100%" }}>
       <CssBaseline />
-      <Header open={open} handleDrawerOpen={handleDrawerOpen} />
-      <SideBar
-        open={open}
-        handleDrawerOpen={handleDrawerOpen}
-        handleDrawerClose={handleDrawerClose}
-      />
-
-      <Box
-        component="main"
-        padding={2}
-        minHeight="100vh"
-        width="100%">
+      <Header open={openDrawer} handleDrawerOpen={handleDrawer} />
+      <SideBar openDrawer={openDrawer} />
+      <Box component="main" padding={2} minHeight="100vh" width="100%">
         <DrawerHeader />
         <Outlet />
       </Box>

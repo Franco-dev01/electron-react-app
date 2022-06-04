@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { Delete, Edit } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 import { STATUS } from "../../../app/constants/status";
-import { STATUS_STYLE_TRANFORM } from "../../../app/constants/statusStyle";
+import { STATUS_STYLE_TRANSFORM } from "../../../app/constants/statusStyle";
 
 const columns: GridColDef[] = [
   {
@@ -54,7 +54,7 @@ const columns: GridColDef[] = [
     headerAlign: "center",
     renderCell: (params) => {
       return (
-        <div className={STATUS_STYLE_TRANFORM[params?.value]}>
+        <div className={STATUS_STYLE_TRANSFORM[params?.value]}>
           {STATUS[params?.value]}
         </div>
       )

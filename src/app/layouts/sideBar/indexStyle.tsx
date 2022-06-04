@@ -3,7 +3,7 @@ import MuiDrawer from "@mui/material/Drawer";
 import ListItemIcon from "@mui/material/ListItemIcon";
 
 
-export const drawerWidth = 240;
+export const drawerWidth = 250;
 
 export const IconStyle = styled(ListItemIcon)(() => ({
   color: "#fff",

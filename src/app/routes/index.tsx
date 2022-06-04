@@ -5,6 +5,6 @@ import { publicRoute } from "./public";
 import { ErrorRoutes } from "./notFound";
 
 export function AppRoutes() {
-  const verifRoutes = Authenticate() ? protectedRoute : publicRoute;
+  const verifRoutes = Authenticate() ? protectedRoute : publicRoute ;
   return useRoutes([...verifRoutes, ...ErrorRoutes]);
 }

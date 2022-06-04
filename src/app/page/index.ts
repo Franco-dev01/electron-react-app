@@ -3,4 +3,5 @@ export * from "./routes/dasboard";
 export * from "./routes/customer";
 export * from "./routes/product";
 export * from "./home";
+export * from "./routes/quote";
 

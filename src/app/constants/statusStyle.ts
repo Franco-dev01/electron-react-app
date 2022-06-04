@@ -1,4 +1,4 @@
-export const STATUS_STYLE_TRANFORM = {
+export const STATUS_STYLE_TRANSFORM = {
     REFUSED: "refused",
     SENT: "sent",
     PAID: "paid",

@@ -10,17 +10,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MailIcon from "@mui/icons-material/Mail";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Avatar, Stack, Typography } from "@mui/material";
-
-import { FlagIcon, SettingIcon, AlertIcon } from "../../components/icons/index";
+import { SettingIcon, AlertIcon } from "../../components/icons/index";
 import { storage } from "../../../app/utils";
 import { Lock, NotificationAddRounded, Person } from "@mui/icons-material";
+import LanguageMenu from "../../..//app/components/menu";
 
-const drawerWidth = 240;
-
+const drawerWidth = 250;
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
@@ -30,7 +27,7 @@ const AppBar = styled(MuiAppBar, {
 })<AppBarProps>(({ theme, open }) => ({
   backgroundColor: "#fff",
   boxShadow: "0px 0px 1px 0px",
-  border: "1px solid transparent",
+  borderBottom: "1px solid #f2f3f9",
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -185,30 +182,6 @@ export default function Header(props: any) {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}>
-      <MenuItem>
-        <IconButton
-          sx={{ width: 100, height: 100 }}
-          size="large"
-          aria-label="show 4 new mails"
-          color="inherit">
-          <Badge badgeContent={4} color="error">
-            <MailIcon />
-          </Badge>
-        </IconButton>
-        <p>Messages</p>
-      </MenuItem>
-      <MenuItem>
-        <IconButton
-          sx={{ width: 100, height: 100 }}
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit">
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -235,22 +208,30 @@ export default function Header(props: any) {
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
+              color:"#000",
               marginRight: 5,
-              ...(open && { display: "none", color: "#032756" })
+              ...(open && { color: "#000" })
             }}
             size="large">
             <MenuIcon />
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" }, alignItems: "center", justifyContent: "center",}}>
-            <IconButton sx={{width: 50, height: 50}}>
-              <Avatar alt="Remy Sharp" src={SettingIcon} sx={{ width: 24, height: 24 }} />
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              alignItems: "center",
+              justifyContent: "center"
+            }}>
+            <IconButton sx={{ width: 50, height: 50 }}>
+              <Avatar src={SettingIcon} sx={{ width: 24, height: 24 }} />
             </IconButton>
-            <IconButton sx={{width: 50, height: 50}} size="small" aria-label="flags" color="inherit">
-              <Avatar alt="Flag" src={FlagIcon} sx={{ width: 24, height: 24 }} />
-            </IconButton>
-            <IconButton  sx={{width: 50, height: 50}} size="large" aria-label="show 4 new mails" color="inherit">
+            <LanguageMenu />
+            <IconButton
+              sx={{ width: 50, height: 50 }}
+              size="large"
+              aria-label="show 4 new mails"
+              color="inherit">
               <Badge badgeContent={4} color="error">
                 <Avatar src={AlertIcon} sx={{ width: 24, height: 24 }} />
               </Badge>
@@ -263,7 +244,7 @@ export default function Header(props: any) {
                 flexDirection: "row",
                 padding: 1,
                 background: "#F3F3F9",
-                cursor: "pointer",
+                cursor: "pointer"
               }}>
               <IconButton
                 size="medium"
@@ -271,9 +252,8 @@ export default function Header(props: any) {
                 aria-label="account of current user"
                 aria-controls={menuId}
                 aria-haspopup="true"
-                color="inherit"
-                >
-                <Avatar alt={user.firstName} />
+                color="inherit">
+                <Avatar alt={user?.firstName} />
               </IconButton>
               <Box sx={{ marginLeft: 2 }}>
                 <Typography color="black" fontSize={16} fontWeight="bold">

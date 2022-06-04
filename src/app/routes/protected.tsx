@@ -8,6 +8,7 @@ import { ModalContextProvider } from "../context/modalContext";
 const { DasboardRoutes} = lazyImport(() => import("../page/routes/dasboard"), "DasboardRoutes");
 const { ProductRoutes } = lazyImport(() => import("../page/index"), "ProductRoutes");
 const { CustomerRoutes } = lazyImport(() => import("../page/index"), "CustomerRoutes");
+const { QuoteRoutes } = lazyImport(() => import("../page/index"), "QuoteRoutes")
 
 ProgressBar.config({
   barColors: {
@@ -58,6 +59,14 @@ export const protectedRoute: RouteObject[] = [
         element: (
           <Suspense fallback={<ProgressBar />}>
             <CustomerRoutes />
+          </Suspense>
+        )
+      },
+      {
+        path: "quote/*",
+        element: (
+          <Suspense fallback={<ProgressBar />}>
+            <QuoteRoutes />
           </Suspense>
         )
       },

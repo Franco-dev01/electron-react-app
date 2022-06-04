@@ -1,5 +1,4 @@
 import { AuthProviderConfig, initReactQueryAuth } from "react-query-auth";
-
 import { storage } from "./../utils/storage";
 import { login } from "../auth/api/login";
 import CustomizedProgressBars from "../../app/components/loanding";
@@ -39,8 +38,10 @@ async function loadUser() {
 
 async function loginFn(data: LoginDto) {
   const response = await login(data);
+  
   return new Promise((resolve, reject) => {
     if (response.data && response.data.user) {
+      
       const user = handleUserResponse(response.data);
       resolve(user);
       return;

@@ -9,19 +9,22 @@ import { BrowserRouter } from "react-router-dom";
 import { queryClient } from "./app/lib/react-query";
 import { QueryClientProvider } from "react-query";
 import { AuthProvider } from "./app/lib/auth";
+import { storage } from "./app/utils";
 
 function App() {
+  const token = storage.getToken();
+
   return (
     <ThemeProvider theme={CustomTheme}>
       <BrowserRouter>
-          <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
-        <QueryClientProvider client={queryClient}>
+        <ErrorBoundary fallback={<ErrorBoundaryFallback />}>
+          <QueryClientProvider client={queryClient}>
             <AuthProvider>
               <AppRoutes />
             </AuthProvider>
-            <ReactQueryDevtools initialIsOpen/>
-        </QueryClientProvider>
-          </ErrorBoundary>
+            {token ? <ReactQueryDevtools initialIsOpen /> : null}
+          </QueryClientProvider>
+        </ErrorBoundary>
       </BrowserRouter>
     </ThemeProvider>
   );

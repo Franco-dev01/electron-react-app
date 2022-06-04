@@ -1,4 +1,4 @@
-export const storagePrefix = "Kkf";
+export const storagePrefix = "kkf";
 
 export const storage = {
   getToken: () => {

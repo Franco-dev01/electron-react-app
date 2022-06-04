@@ -1,7 +1,6 @@
 import { Button, CircularProgress, Grid, TextField, Typography } from "@mui/material";
-import React from "react";
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRegister } from "../api/register";
 import { registerDto } from "../types";
 
@@ -12,8 +11,6 @@ export default function SignUp() {
     email: "",
     phoneNumber: "",
     password: "",
-    
-    // confirmPwd: ""
   };
   const methods = useForm({
     defaultValues: initialValue,
@@ -27,20 +24,17 @@ export default function SignUp() {
     formState: { errors }
   } = methods;
 
-  const { mutate, isLoading, isSuccess, data } = useRegister();
+  const { mutate, isLoading } = useRegister();
+  
 
   const submitForm = async (values: registerDto) => {
-    try {
-      await mutate(values);
-      navigate("auth/login");
-    } catch (error) {
-      console.log("[] error", error);
-    }
+     mutate(values);
+     navigate("auth/login");
   };
+
+  
   return (
     <>
-      {isSuccess && <Navigate to="app/dashboard" replace state={{ data }} />}
-
       <form autoComplete="none" onSubmit={methods.handleSubmit(submitForm)}>
         <Grid container spacing={2}>
           <Grid item xs={12} md={12}>
@@ -113,18 +107,6 @@ export default function SignUp() {
               {...register("password")}
             />
           </Grid>
-          {/* <Grid item xs={12} md={12}>
-            <TextField
-              color="primary"
-              type="password"
-              label="Confirmer le mode de passe"
-              fullWidth
-              size="small"
-              error={!!errors["confirmPwd"]}
-              helperText={errors["confirmPwd"]?.message}
-              {...register("confirmPwd")}
-            />
-          </Grid> */}
           <Grid item xs={12} md={12} textAlign="center" width={100}>
             <Button
               type="submit"
